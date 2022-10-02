@@ -1,0 +1,15 @@
+{
+    "developerAbbreviation": "DEV",
+    "protocolName": "Forta ERC20 Token Watcher",
+    "protocolAbbrev": "FTW",
+    "contracts": {
+        "contractName1": {
+            "name": "Forta Token",
+            "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+            "watch": {
+                "type": "Info",
+                "severity": "Info"
+            }
+        }
+    }
+}
