@@ -1,7 +1,8 @@
 import { ethers } from "hardhat";
+import { contractName } from './utils';
 
 async function main() {
-    const Forta = await ethers.getContractFactory("FortaToken");
+    const Forta = await ethers.getContractFactory(contractName);
     const forta = await Forta.deploy(10000000); // ERC20 token
 
     await forta.deployed();
