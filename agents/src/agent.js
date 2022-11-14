@@ -16,10 +16,10 @@ if (contractList.length === 0) {
   throw new Error('Must supply at least one address to watch');
 }
 
-function createAlert(name, address, normalizedValue, from, to, abbrev, type, severity) {
+function createAlert(name, address, normalizedValue, from, abbrev, type, severity) {
   return Finding.fromObject({
-    name: `High ${name} transfer`,
-    description: `A large amount (${normalizedValue}) from ${name} with address: ${address} has been transferred from ${from} to ${to}`,
+    name: `Unstake ${name} event`,
+    description: `An unstake amount (${normalizedValue}) of staker: ${from} from contract ${name} with address: ${address} has unstaked from the contract`,
     alertId: `${developerAbbrev}-${abbrev}-ADDRESS-WATCH`,
     type: FindingType[type],
     severity: FindingSeverity[severity],
@@ -38,13 +38,15 @@ async function handleTransaction(txEvent) {
       // process contract events
       contractEvents.forEach((event) => {
         // extract transfer event arguments
-        const { to, from, value } = event.args;
+        console.log("event: ", event)
+        const { _address, amount } = event.args;
+        console.log("value: ", amount)
         // shift decimals of transfer value
-        const normalizedValue = value.toString();
+        const normalizedValue = amount.toString();
 
         // if more than 10,000 Forta were transferred, report it
         if (normalizedValue > 0) {
-          findings.push(createAlert(contract.name, contract.address, normalizedValue, from, to, protocolAbbrev, contract.watch.type, contract.watch.severity));
+          findings.push(createAlert(contract.name, contract.address, normalizedValue, _address, protocolAbbrev, contract.watch.type, contract.watch.severity));
         }
       });
     }

@@ -2,3 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as fortaSol from "./Forta.sol";
+export * as stakingContractSol from "./StakingContract.sol";

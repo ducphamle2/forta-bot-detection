@@ -3,3 +3,5 @@
 /* eslint-disable */
 import type * as fortaSol from "./Forta.sol";
 export type { fortaSol };
+import type * as stakingContractSol from "./StakingContract.sol";
+export type { stakingContractSol };

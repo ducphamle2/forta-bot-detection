@@ -49,6 +49,8 @@ module.exports = {
 
 5. Run Forta bot listener in root directory (not in `agents/` dir): `yarn hardhat forta:run`
 
-6. Deploy the contract: `yarn hardhat run scripts/deploy.ts  --network localhost`
+6. Deploy the contract: `yarn hardhat run scripts/deploy-forta.ts  --network localhost`
 
-7. Try sending some tokens: `yarn hardhat run scripts/transfer.ts  --network localhost`
+7. Deploy the contract: `yarn hardhat run scripts/deploy-staking.ts  --network localhost`
+
+8. Try sending some tokens: `yarn hardhat run scripts/transfer.ts  --network localhost`
