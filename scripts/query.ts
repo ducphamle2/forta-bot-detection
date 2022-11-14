@@ -4,7 +4,7 @@ import { contractName, contractAddress } from './utils';
 async function main() {
 
     // need to deploy token first locally
-    const fortaContract = await ethers.getContractAt(contractName, contractAddress);
+    const fortaContract = await ethers.getContractAt("FortaToken", contractAddress);
 
     const result = await fortaContract.balanceOf(contractAddress)
     console.log(`query result: `, result.toString());
