@@ -47,10 +47,14 @@ module.exports = {
 
 4. Config `agents/agent-config.json` file with an addition field: `event` (TOOD: come up with better struct to filter)
 
-5. Run Forta bot listener in root directory (not in `agents/` dir): `yarn hardhat forta:run`
+5. Run Forta bot listener in root directory (not in `agents/` dir): `yarn hardhat forta:run`. For production polygon: `NODE_ENV=prod yarn hardhat forta:run --config-file ~/.forta/forta.config-polygon.json`
 
-6. Deploy the contract: `yarn hardhat run scripts/deploy-forta.ts  --network localhost`
+6. Deploy the contract: `yarn hardhat run scripts/deploy.ts  --network localhost`
 
-7. Deploy the contract: `yarn hardhat run scripts/deploy-staking.ts  --network localhost`
+7. Try sending some tokens: `yarn hardhat run scripts/transfer.ts  --network localhost`
 
-8. Try sending some tokens: `yarn hardhat run scripts/transfer.ts  --network localhost`
+for Polygon example:
+
+`NODE_ENV=prod yarn hardhat run scripts/staking.ts  --network polygon`
+
+Test that works on Polygon: `NODE_ENV=prod yarn hardhat forta:run --config-file ~/.forta/forta-polygon.config.json --range 35732612..35732613` with tx hash: https://polygonscan.com/tx/0xddbb2859deb6c9faf8d81563b3f9ae40f0e491ad68a9fed24dc2287232da0f2e

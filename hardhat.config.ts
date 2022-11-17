@@ -1,5 +1,10 @@
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-forta";
+import { config as dotenvConfig } from "dotenv";
+import { resolve } from "path";
+
+const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
+dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
 module.exports = {
   // This is a sample solc configuration that specifies which version of solc to use
@@ -13,7 +18,8 @@ module.exports = {
   },
   networks: {
     polygon: {
-      url: "https://polygon-rpc.com",
+      url: process.env.POLYGON_RPC || "https://polygon-rpc.com",
+      accounts: [process.env.DEVELOPER_PRIVATE_KEY, process.env.ETHERNAUT_PRIVATE_KEY]
     },
     hardhat: {
       accounts: [{

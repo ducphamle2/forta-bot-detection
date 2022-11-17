@@ -28,22 +28,10 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
-export declare namespace Staking {
-  export type LockStruct = {
-    amount: PromiseOrValue<BigNumberish>;
-    lockBlock: PromiseOrValue<BigNumberish>;
-  };
-
-  export type LockStructOutput = [BigNumber, BigNumber] & {
-    amount: BigNumber;
-    lockBlock: BigNumber;
-  };
-}
-
 export interface StakingInterface extends utils.Interface {
   functions: {
+    "changeRewardToken(address)": FunctionFragment;
     "funds(address)": FunctionFragment;
-    "getLock(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rewardToken()": FunctionFragment;
@@ -54,8 +42,8 @@ export interface StakingInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "changeRewardToken"
       | "funds"
-      | "getLock"
       | "owner"
       | "renounceOwnership"
       | "rewardToken"
@@ -65,11 +53,11 @@ export interface StakingInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "funds",
+    functionFragment: "changeRewardToken",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
-    functionFragment: "getLock",
+    functionFragment: "funds",
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
@@ -94,8 +82,11 @@ export interface StakingInterface extends utils.Interface {
     values: [PromiseOrValue<BigNumberish>]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "changeRewardToken",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "funds", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "getLock", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -178,17 +169,17 @@ export interface Staking extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    changeRewardToken(
+      _rewardToken: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     funds(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amount: BigNumber; lockBlock: BigNumber }
     >;
-
-    getLock(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<[Staking.LockStructOutput]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
@@ -214,17 +205,17 @@ export interface Staking extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  changeRewardToken(
+    _rewardToken: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   funds(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<
     [BigNumber, BigNumber] & { amount: BigNumber; lockBlock: BigNumber }
   >;
-
-  getLock(
-    _address: PromiseOrValue<string>,
-    overrides?: CallOverrides
-  ): Promise<Staking.LockStructOutput>;
 
   owner(overrides?: CallOverrides): Promise<string>;
 
@@ -250,17 +241,17 @@ export interface Staking extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    changeRewardToken(
+      _rewardToken: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     funds(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { amount: BigNumber; lockBlock: BigNumber }
     >;
-
-    getLock(
-      _address: PromiseOrValue<string>,
-      overrides?: CallOverrides
-    ): Promise<Staking.LockStructOutput>;
 
     owner(overrides?: CallOverrides): Promise<string>;
 
@@ -308,13 +299,13 @@ export interface Staking extends BaseContract {
   };
 
   estimateGas: {
-    funds(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    changeRewardToken(
+      _rewardToken: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    getLock(
-      _address: PromiseOrValue<string>,
+    funds(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -343,13 +334,13 @@ export interface Staking extends BaseContract {
   };
 
   populateTransaction: {
-    funds(
-      arg0: PromiseOrValue<string>,
-      overrides?: CallOverrides
+    changeRewardToken(
+      _rewardToken: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    getLock(
-      _address: PromiseOrValue<string>,
+    funds(
+      arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

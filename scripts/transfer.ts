@@ -1,13 +1,12 @@
 import { ethers } from "hardhat";
+import { fortaContract } from './utils';
 
 async function main() {
 
-    const fortaToken = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-
     // need to deploy token first locally
-    const fortaContract = await ethers.getContractAt("FortaToken", fortaToken);
+    const forta = await ethers.getContractAt("FortaToken", fortaContract);
 
-    const result = await fortaContract.transfer(fortaToken, 2);
+    const result = await forta.transfer('0xE05cCbcbCb088D8Ae063401249366348cf0eD6C4', 100);
     console.log(`transfer result: `, result);
 }
 

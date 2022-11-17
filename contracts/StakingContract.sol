@@ -22,6 +22,10 @@ contract Staking is Ownable {
         rewardToken = _rewardToken;
     }
 
+    function changeRewardToken(IERC20 _rewardToken) public onlyOwner {
+        rewardToken = _rewardToken;
+    }
+
     function stake(uint256 timelock) public payable {
         require(msg.value > 0, "Eth amount deposited must be greater than 0");
 
@@ -64,9 +68,5 @@ contract Staking is Ownable {
         payable(msg.sender).transfer(amount);
 
         emit Unstake(msg.sender, amount);
-    }
-
-    function getLock(address _address) public view returns (Lock memory) {
-        return funds[_address];
     }
 }

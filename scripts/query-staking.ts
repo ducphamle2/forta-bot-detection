@@ -4,10 +4,15 @@ import { contractName, fortaContract, stakingContract } from './utils';
 async function main() {
 
     // need to deploy token first locally
-    const forta = await ethers.getContractAt("FortaToken", fortaContract);
+    const staking = await ethers.getContractAt("Staking", stakingContract);
 
-    const result = await forta.balanceOf(fortaContract)
-    console.log(`query result: `, result.toString());
+    const funds = await staking.funds("0x16FF312A4d4171a68a7e06c12916015D30235251");
+    console.log(`query result: `, funds.toString());
+
+    // query owner
+    const owner = await staking.owner();
+
+    console.log("owner: ", owner);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

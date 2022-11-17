@@ -1,0 +1,16 @@
+{
+    "developerAbbreviation": "DEV",
+    "protocolName": "Forta ERC20 Token Watcher",
+    "protocolAbbrev": "FTW",
+    "contracts": {
+        "contractName1": {
+            "name": "Staking Token",
+            "address": "0x0a04F8295701F52ee6ec6238424B7A144270E8d4",
+            "event": "event Unstake(address _address, uint256 amount)",
+            "watch": {
+                "type": "Info",
+                "severity": "Info"
+            }
+        }
+    }
+}

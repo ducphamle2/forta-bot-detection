@@ -1,14 +1,14 @@
 import { ethers } from "hardhat";
+import { stakingContract } from './utils';
 
 async function main() {
 
-    const stakingToken = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
     const signers = await ethers.getSigners();
 
     // need to deploy token first locally
-    const stakingContract = await ethers.getContractAt("Staking", stakingToken, signers[1]);
+    const staking = await ethers.getContractAt("Staking", stakingContract, signers[1]);
 
-    const result = await stakingContract.unstake(1);
+    const result = await staking.unstake(1);
     console.log(`stake result: `, result);
 }
 
